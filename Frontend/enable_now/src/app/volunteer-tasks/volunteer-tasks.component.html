@@ -1,0 +1,66 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <div style="width: 85vw">
+      <mat-table matTableExporter #exporter="matTableExporter" [hiddenColumns]="[4,5]" style="margin-top: 150px;"
+        class="table-container mat-elevation-z8" matSort aria-label="TestDataSource" [class.isMobile]="isMobile"
+        [dataSource]="dataSource" id="print">
+
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">
+            Titlu
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <ng-container>
+              {{ row.title}}
+            </ng-container>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">Dată</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ formatDate(row.date) }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">Descriere</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.description }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">Tip</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{row.type}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">Status</mat-header-cell>
+          <mat-cell *matCellDef="let row"
+            [ngStyle]="{'color': row.status === 1 ? 'red' : row.status === 3 ? 'green' : ''}">
+            {{
+            row.status === 0
+            ? 'Cererea nu a fost încă preluată'
+            : row.status === 1
+            ? 'În progres'
+            : row.status === 3
+            ? 'Finalizat'
+            : ''
+            }}
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></mat-row>
+      </mat-table>
+      <div class="mat-paginator-container">
+        <mat-paginator #paginator [length]="dataSource?.data?.length" hidePageSize="true" [pageIndex]="0" [pageSize]="5"
+          aria-label="Select page" style="margin-bottom: 50px;">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

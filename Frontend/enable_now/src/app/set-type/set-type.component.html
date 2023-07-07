@@ -1,0 +1,134 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 20px;">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-stepper style="margin-top: 80px; height: 500px;" class="example-stepper"
+      [orientation]="(stepperOrientation | async)!">
+      <mat-step [stepControl]="firstFormGroup" label="Termeni si conditii" [editable]="true">
+        <form [formGroup]="firstFormGroup">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <div style="height: 350px; width: 700px; overflow: auto;">
+              <p><b>Termeni și condiții</b></p>
+              <ul>
+                <li>
+                  Bun venit și mulțumim că ați ales să utilizați serviciile noastre. Vă rugăm să citiți cu atenție
+                  termenii și condițiile de utilizare înainte de a accesa sau utiliza platforma noastră. Prin accesarea
+                  și utilizarea platformei noastre, sunteți de acord să fiți obligat de acești termeni și condiții. Dacă
+                  nu sunteți de acord cu acești termeni, vă rugăm să nu utilizați platforma noastră.
+                </li>
+              </ul>
+
+              <ol>
+                <li>
+                  Drepturile de proprietate intelectuală
+                  <ul>
+                    <li>
+                      Platforma noastră și conținutul său, inclusiv, dar fără a se limita la, text, grafică, logo-uri,
+                      imagini, materiale audio și video, sunt protejate de drepturile de proprietate intelectuală și
+                      sunt deținute de noi sau de titularii noștri de licență.
+                    </li>
+                    <li>
+                      Utilizarea platformei noastre nu vă acordă dreptul de a utiliza mărcile noastre comerciale,
+                      logo-urile noastre sau alte elemente distinctive ale brandului nostru fără permisiunea noastră sau
+                      a titularilor noștri de drepturi.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  Utilizarea platformei
+                  <ul>
+                    <li>
+                      Aveți dreptul de a accesa și utiliza platforma noastră în scopuri legale și conforme cu acești
+                      termeni și condiții.
+                    </li>
+                    <li>
+                      Nu aveți dreptul să utilizați platforma noastră în orice mod care ar putea afecta funcționalitatea
+                      sau securitatea acesteia sau care ar putea cauza daune sau perturbări ale serviciilor noastre.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  Confidențialitatea datelor
+                  <ul>
+                    <li>
+                      Respectăm confidențialitatea datelor dvs. și ne angajăm să protejăm informațiile personale pe care
+                      le colectăm de la dvs. în conformitate cu politica noastră de confidențialitate. Vă rugăm să
+                      citiți politica noastră de confidențialitate pentru a înțelege cum colectăm, utilizăm și protejăm
+                      datele dvs. personale.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  Limitarea responsabilității
+                  <ul>
+                    <li>
+                      Utilizarea platformei noastre se face pe propriul dvs. risc. Nu garantăm că platforma noastră va
+                      fi disponibilă în mod continuu sau fără erori și nu ne asumăm responsabilitatea pentru eventualele
+                      daune sau pierderi cauzate de utilizarea sau imposibilitatea utilizării platformei noastre.
+                    </li>
+                    <li>
+                      Nu ne asumăm responsabilitatea pentru conținutul sau acțiunile utilizatorilor noștri sau pentru
+                      orice conținut deținut de terți.
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  Modificarea termenilor și condițiilor
+                  <ul>
+                    <li>
+                      Ne rezervăm dreptul de a modifica acești termeni și condiții în orice moment. Orice modificări vor
+                      intra în vigoare imediat ce sunt publicate pe platforma noastră. Continuarea utilizării platformei
+                      noastre după aceste modificări reprezintă acceptul dvs. al termenilor și condițiilor modificate.
+                    </li>
+                  </ul>
+                </li>
+              </ol>
+              <mat-checkbox formControlName="termsAndConditions"><b>Am citit termenii și condițiile</b></mat-checkbox>
+            </div>
+
+
+            <button style="margin-top: 5px;" mat-flat-button (click)="getUserDetails()"
+              [disabled]="!firstFormGroup.value.termsAndConditions" color="primary" matStepperNext>Accept</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Tipul de utilizator" [editable]="true">
+        <form [formGroup]="secondFormGroup">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="50px">
+            <h2>Alege o opțiune</h2>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="80px">
+              <div fxLayout="column" fxLayoutAlign="center center"
+                [ngClass]="{'option-select': secondFormGroup.value.volunteer, 'option': !secondFormGroup.value.volunteer}">
+                <h5>Vreau să ajut</h5>
+                <img style="width: 130px;" src="../../../../assets/imgs/help.png">
+                <mat-checkbox formControlName="volunteer" (change)="toggleCheckbox('volunteer')"></mat-checkbox>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="center center"
+                [ngClass]="{'option-select': secondFormGroup.value.peopleWithDisability, 'option': !secondFormGroup.value.peopleWithDisability}">
+                <h5>Am o dizabilitate</h5>
+                <img style="width: 130px;" src="../../../../assets/imgs/disability.png">
+                <mat-checkbox formControlName="peopleWithDisability"
+                  (change)="toggleCheckbox('peopleWithDisability')"></mat-checkbox>
+              </div>
+            </div>
+            <button mat-flat-button color="primary" matStepperNext
+              [disabled]="!secondFormGroup.value.volunteer && !secondFormGroup.value.peopleWithDisability">Continuă</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup" label="Finalizeaza" [editable]="true">
+        <form [formGroup]="thirdFormGroup">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+            <h2>Felicitări!</h2>
+            <img style="width: 180px" src="../../../../assets/imgs/happy.png">
+            <p>De astăzi faci parte din comunitatea Enable Now. </p>
+            <button mat-flat-button color="primary" (click)="addUser()">Finalizează</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>
+<app-footer></app-footer>

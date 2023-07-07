@@ -1,0 +1,24 @@
+<mat-toolbar role="heading" *ngIf="isVolunteer || isPeopleWithDisability" fxLayout="row" fxLayoutAlign="start center">
+  <div class="toolbar-content">
+    <img style="width: 180px; margin-right: 100px;" src="../../../../assets/imgs/logo.png">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+      <a routerLink="/home" routerLinkActive="is-active" class="link">Acasă</a>
+      <a [matMenuTriggerFor]="menu">Activități&#9660;</a>
+      <mat-menu #menu="matMenu">
+        <button *ngIf="isPeopleWithDisability" routerLink="/volunteer" routerLinkActive="is-active" mat-menu-item>Cere
+          ajutor</button>
+        <button *ngIf="isPeopleWithDisability" routerLink="/history" routerLinkActive="is-active" mat-menu-item>Cererile
+          mele</button>
+        <button *ngIf="isVolunteer" routerLink="/tasks" routerLinkActive="is-active" mat-menu-item>Oferă ajutor</button>
+        <button *ngIf="isVolunteer" routerLink="/voltasks" routerLinkActive="is-active" mat-menu-item>Istoric
+          activități</button>
+      </mat-menu>
+      <a routerLink="/donate" routerLinkActive="is-active">Donează</a>
+      <a routerLink="/about" routerLinkActive="is-active">Despre noi</a>
+      <a href="javascript:void(0);" (click)="openDialog()">Contul meu</a>
+      <a href="javascript:void(0);" (click)="openDialogHelp()">Ajutor</a>
+      <button *ngIf="isVolunteer" routerLink="/tasks" routerLinkActive="is-active" mat-flat-button color="primary">FII
+        VOLUNTAR</button>
+    </div>
+  </div>
+</mat-toolbar>

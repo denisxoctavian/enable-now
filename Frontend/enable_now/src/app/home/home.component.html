@@ -1,0 +1,53 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="body" style="background-color: rgb(248, 248, 248);">
+  <div fxLayout="row" fxLayoutAlign="center center" class="container">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <h1>Asociația Enable Now</h1>
+      <p>Împreună putem face o schimbare pentru că picătură cu picătură se face un ocean.</p>
+      <ul>
+        <button style="margin-right: 5px;" mat-flat-button color="primary" routerLink="/donate"
+          routerLinkActive="is-active">Doneaza</button>
+        <button routerLink="/about" routerLinkActive="is-active" mat-flat-button color="primary">Despre</button>
+      </ul>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center center" class="">
+    <div fxLayout="column" fxLayoutAlign="center center" class="body">
+      <h3>Nu putem schimba lumea, dar putem schimba lumea CUIVA.</h3>
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="100px" class="">
+        <div class="stats-box">
+          <div class="stats">
+            <mat-icon>accessible</mat-icon>
+            <p>{{ peopleHelped }}</p>
+            <p>Persoane ajutate</p>
+          </div>
+        </div>
+        <div class="stats-box">
+          <div class="stats">
+            <mat-icon>people</mat-icon>
+            <p>{{volunteers}}</p>
+            <p>Voluntari</p>
+          </div>
+        </div>
+        <div class="stats-box">
+          <div class="stats">
+            <mat-icon>assignment_turned_in</mat-icon>
+            <p>{{solvedTasks}}</p>
+            <p>Taskuri rezolvate</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div [ngClass]="{'container-action': isVolunteer, 'container-action-disability': !isVolunteer}" fxLayout="row"
+    fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <h1>{{ isVolunteer ? 'Vrei să fii o picătură în ocean, adică să ajuți un om cu dizabilități?' : 'Noi te putem
+        ajuta!' }}</h1>
+      <button *ngIf="isVolunteer" class="call-to-action-btn" mat-flat-button color="accent" routerLink="/tasks"
+        routerLinkActive="is-active">Ajuta</button>
+      <button *ngIf="isPeopleWithDisability" class="call-to-action-btn" mat-flat-button color="accent"
+        routerLink="/volunteer" routerLinkActive="is-active">Cere ajutor</button>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,83 @@
+<div fxLayout="column" fxLayoutAlign="center center" style="margin-bottom: 20px;">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-stepper style="margin-top:80px; height: 700px;" class="example-stepper"
+      [orientation]="(stepperOrientation | async)!">
+      <mat-step [stepControl]="firstFormGroup" label="Termeni si conditii" [editable]="true">
+        <form [formGroup]="firstFormGroup">
+          <div fxLayout="column" fxLayoutAlign="center center">
+            <h2>Alege data la care ai nevoie de ajutor:</h2>
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <mat-card style="margin-top: 1px; width: 400px;" class="demo-inline-calendar-card">
+                <mat-calendar [(selected)]="selected" [minDate]="minDate" [maxDate]="maxDate"
+                  (selectedChange)="onDateSelection()"></mat-calendar>
+              </mat-card>
+            </div>
+            <button style="margin-top: 5px;" mat-flat-button [disabled]="!selected" color="primary"
+              matStepperNext>Continuă</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Tipul de utilizator" [editable]="true">
+        <form [formGroup]="secondFormGroup">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="40px">
+            <h2>Alege o opțiune:</h2>
+            <mat-form-field style="margin-top: 80px;" appearance="fill">
+              <mat-label>Tipuri de activitati</mat-label>
+              <mat-select formControlName="selectedType">
+                <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+              <div fxLayout="column" fxLayoutAlign="center center" class="activity">
+                <p>Curățenie</p>
+                <img style="width: 80px;" src="../../../../assets/imgs/cleaning.png">
+              </div>
+              <div fxLayout="column" fxLayoutAlign="center center" class="activity">
+                <p>Plimbare</p>
+                <img style="width: 80px;" src="../../../../assets/imgs/walk.png">
+              </div>
+              <div fxLayout="column" fxLayoutAlign="center center" class="activity">
+                <p>Socializare</p>
+                <img style="width: 80px;" src="../../../../assets/imgs/talk.png">
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="15px">
+              <div fxLayout="column" fxLayoutAlign="center center" class="activity">
+                <p>Cumpărături</p>
+                <img style="width: 80px;" src="../../../../assets/imgs/shop.png">
+              </div>
+              <div fxLayout="column" fxLayoutAlign="center center" class="activity">
+                <p>Vizită medicală</p>
+                <img style="width: 80px;" src="../../../../assets/imgs/medic.png">
+              </div>
+              <div fxLayout="column" fxLayoutAlign="center center" class="activity">
+                <p>Altceva</p>
+                <img style="width: 80px;" src="../../../../assets/imgs/disability.png">
+              </div>
+            </div>
+            <button mat-flat-button color="primary" matStepperNext
+              [disabled]="!secondFormGroup.value.selectedType">Continuă</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup" label="Finalizeaza" [editable]="true">
+        <form [formGroup]="thirdFormGroup">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+            <h2>Completează informațiile:</h2>
+            <mat-form-field>
+              <input matInput placeholder="Titlu" formControlName="title">
+            </mat-form-field>
+            <mat-form-field style="width: 100%; height: 300px;">
+              <textarea style="width: 100%; height: 300px;" matInput placeholder="Descriere"
+                formControlName="description" class="custom-textarea"></textarea>
+            </mat-form-field>
+            <button
+              [disabled]="!thirdFormGroup.value.description || !thirdFormGroup.value.title || !secondFormGroup.value.selectedType"
+              (click)="createTask()" mat-flat-button color="primary">Cere ajutor</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>
+<app-footer></app-footer>

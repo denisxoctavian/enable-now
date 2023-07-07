@@ -1,0 +1,14 @@
+<mat-card class="mat-elevation-z8">
+  <mat-card-title style="text-align: center; font-size: 20px; color: #FFC107">{{ action === 'cancel' ? 'Șterge cererea'
+    : action === 'apply' ? 'Aplică la cerere' : 'Finalizează cererea' }}</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content fxFlexAlign="space-around center">
+    <p>{{ action === 'cancel' ? 'Ești sigur că vrei să renunți la cerere?' : action === 'apply' ? 'Esti sigur că poți
+      ajuta persoana aceasta ?' : 'Ești sigur că cererea a fost finalizată?' }}</p>
+    <div mat-dialog-actions>
+      <button mat-flat-button color="primary" mat-dialog-close cdkFocusInitial
+        (click)="action === 'cancel' ? deleteTask() : (action === 'apply' ? applyTask() : finishTask())">Da</button>
+      <button mat-flat-button mat-dialog-close>Nu</button>
+    </div>
+  </mat-card-content>
+</mat-card>

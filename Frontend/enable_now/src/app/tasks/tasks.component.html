@@ -1,0 +1,65 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxLayoutAlign="space-around center">
+    <div style="width: 85vw">
+      <mat-table matTableExporter #exporter="matTableExporter" [hiddenColumns]="[4,5]" style="margin-top: 150px;"
+        class="table-container mat-elevation-z8" matSort aria-label="TestDataSource" [class.isMobile]="isMobile"
+        [dataSource]="dataSource" id="print">
+
+        <ng-container matColumnDef="task.title">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">
+            Titlu
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <ng-container>
+              {{ row.task.title}}
+            </ng-container>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="task.description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">Descriere</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ row.task.description }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="task.type">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">Tip</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{row.task.type}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="task.date">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">Dată</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            {{ formatDate(row.task.date) }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="user.firstName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="w-50">Creator</mat-header-cell>
+          <mat-cell [matTooltip]="(row.user?.firstName ?row.user.email : '')" *matCellDef="let row">
+            {{row.user.firstName+" "+row.user.lastName}}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="apply">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="small-column-header">Aplică</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="small-column">
+            <mat-icon style="color: green;" (click)="openDialog(row,'apply')">check_circle</mat-icon>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></mat-row>
+      </mat-table>
+      <div class="mat-paginator-container">
+        <mat-paginator #paginator [length]="dataSource?.data?.length" hidePageSize="true" [pageIndex]="0" [pageSize]="5"
+          aria-label="Select page" style="margin-bottom: 50px;">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

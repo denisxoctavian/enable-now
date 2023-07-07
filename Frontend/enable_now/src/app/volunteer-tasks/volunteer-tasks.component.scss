@@ -1,0 +1,39 @@
+mat-header-cell {
+  font-weight: 500;
+  color: white;
+}
+
+mat-header-row::ng-deep {
+  background-color: #FFC107;
+  color: white;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+mat-paginator::ng-deep {
+  font-weight: 500;
+  border: 1px solid rgb(221, 220, 220);
+  box-shadow: -5px 0px 10px 1px rgba(228, 227, 227, 0.8);
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: white;
+}
+
+.small-column {
+  flex: 0 0 110px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.small-column-header {
+  flex: 0 0 110px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
